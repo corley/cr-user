@@ -1,0 +1,6 @@
+{
+  "name": "cr-user",
+  "dependencies": {
+    "angular": "~1.2.16"
+  }
+}
