@@ -13,7 +13,7 @@ angular.module('cr.user', [])
             delete $crUser.getAuthSession()['cr-user'];
             $rootScope.$emit("$crUserPostLogout", {});
         },
-        getIdenty: function() {
+        getIdentity: function() {
             return $crUser.getAuthSession()['cr-user'];
         }
     };
