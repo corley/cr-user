@@ -6,15 +6,15 @@ angular.module('cr.user', [])
             $crUser.getAuthHandler().setSign(sign);
         },
         login: function(o) {
-            $crUser.getAuthSession().cr-user = o;
+            $crUser.getAuthSession()['cr-user'] = o;
             $rootScope.$emit("$crUserPostLogin", {});
         },
         logout: function(){
-            delete $crUser.getAuthSession.cr-user;
+            delete $crUser.getAuthSession()['cr-user'];
             $rootScope.$emit("$crUserPostLogout", {});
         },
         getIdenty: function() {
-            return $crUser.getAuthSession().cr-user;
+            return $crUser.getAuthSession()['cr-user'];
         }
     };
 }])
