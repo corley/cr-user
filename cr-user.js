@@ -1,5 +1,5 @@
 angular.module('cr.user', [])
-.factory('crUser', ['$crUser', function($crUser) {
+.factory('crUser', ['$crUser', '$rootScope', function($crUser, $rootScope) {
     
     return {
         setKey: function(sign) {
@@ -7,9 +7,11 @@ angular.module('cr.user', [])
         },
         login: function(o) {
             $crUser.getAuthSession().cr-user = o;
+            $rootScope.$emit("$crUserPostLogin", {});
         },
         logout: function(){
             delete $crUser.getAuthSession.cr-user;
+            $rootScope.$emit("$crUserPostLogout", {});
         },
         getIdenty: function() {
             return $crUser.getAuthSession().cr-user;
