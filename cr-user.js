@@ -1,6 +1,6 @@
 angular.module('cr.user', [])
 .factory('crUser', ['$crUser', '$rootScope', function($crUser, $rootScope) {
-    
+
     return {
         setKey: function(sign) {
             $crUser.getAuthHandler().setSign(sign);
@@ -15,15 +15,21 @@ angular.module('cr.user', [])
         },
         getIdentity: function() {
             return $crUser.getAuthSession()['cr-user'];
+        },
+        setParameter: function(name, value){
+            $crUser.getAuthSession()['cr-user'][name] = value;
+        },
+        getParameter: function(name){
+            return $crUser.getAuthSession()['cr-user'][name];
         }
     };
 }])
 .provider('$crUser', function() {
     var _config = {
-        authHandler: null,
-        authSession: null
+            authHandler: null,
+            authSession: null
     };
-    
+
     this.setAuthHandler = function (authHandler) {
         _config.authHandler = authHandler;
     };
@@ -31,7 +37,7 @@ angular.module('cr.user', [])
     this.getAuthHandler = function() {
         return _config.authHandler;
     };
-    
+
     this.setAuthSession = function (authSession) {
         _config.authSession = authSession;
     };
@@ -39,7 +45,7 @@ angular.module('cr.user', [])
     this.getAuthSession = function() {
         return _config.authSession;
     };
-    
+
     this.$get = function() {
         return this;
     };
