@@ -1,6 +1,10 @@
 angular.module('cr.user', [])
 .factory('crUser', ['$crUser', '$rootScope', function($crUser, $rootScope) {
 
+    if($crUser.getAuthSession()){
+        $rootScope.$emit("$crUserResumeSession", {identity: $crUser.getAuthSession()['cr-user']});
+    }
+
     return {
         setKey: function(sign) {
             $crUser.getAuthHandler().setSign(sign);
