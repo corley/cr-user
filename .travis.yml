@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-    - 0.11
-    - 0.10
+- 0.11
+- 0.1
 before_script:
-    - npm install
+- npm install
+notifications:
+  slack:
+    secure: RhdL4rwRfV7wSfCdyfcAf9HhRzkv37h2mYsoI07vNR4LXNNrrDZX9NRK9V3FaWsOWtvVpXFkGNnMrhxu/eEf+wp7V5Gpnm4iYssHXRwCSheNlF7vsphoIWWCjyBm7Z768OQqd9/b5FyqJIOreKYF/1xnff/kT32+XN+351iaTMU=
