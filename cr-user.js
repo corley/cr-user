@@ -6,15 +6,21 @@ angular.module('cr.user', [])
     }
 
     return {
-        setKey: function(sign) {
-            $crUser.getAuthHandler().setSign(sign);
+        setCredentials: function(credentials) {
+            if($crUser.getAuthHandler()) {
+                $crUser.getAuthHandler().setSign(credentials);
+            }
         },
-        login: function(o) {
-            $crUser.getAuthSession()['cr-user'] = o;
+        login: function(userData, authCredentials) {
+            $crUser.getAuthSession()['cr-user'] = userData;
+            if(authCredentials && $crUser.getAuthHandler()) {
+                $crUser.getAuthHandler().setSign(authCredentials);
+            }
             $rootScope.$emit("$crUserPostLogin", {});
+//            console.log("my storage in", $crUser._config.authSession);
         },
         logout: function(){
-            delete $crUser.getAuthSession()['cr-user'];
+            $crUser.voidSession();
             $rootScope.$emit("$crUserPostLogout", {});
         },
         getIdentity: function() {
@@ -48,6 +54,15 @@ angular.module('cr.user', [])
 
     this.getAuthSession = function() {
         return _config.authSession;
+    };
+    
+    this.voidSession = function() {
+       if(_config.authSession) {
+           delete _config.authSession['cr-user'];
+       }
+       if(_config.authHandler) {
+           _config.authHandler.voidSign();
+       }
     };
 
     this.$get = function() {
